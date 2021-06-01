@@ -27,8 +27,9 @@ class Category extends Component {
     }
 
     fetchSubCategories = () => {
-        axios.get( url + '/subcategory/category/' + this.props.category.category_id )
+        axios.get( url + '/app/product/subcategory/' + this.props.category.category_id )
         .then(res=>{ 
+            console.log(res.data);
             if( _.isArray(res.data.datasub) )
                 this.setState({ sub_categories: res.data.datasub })
             else

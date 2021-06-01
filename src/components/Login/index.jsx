@@ -6,7 +6,7 @@ import { url } from '../../config'
 import { loginAction } from '../../actions'
 import { Redirect } from 'react-router-dom'
 import Loading from '../Loading'
-
+import que from "querystring"
 import imageform from '../../assets/login-form.svg'
 import imgBackground from '../../assets/login-bg.svg'
 import imgPerson from '../../assets/login-person.svg'
@@ -36,17 +36,27 @@ class index extends Component {
         if(!password){ this.setState({ error: 'Enter your password' }) }
         if(!username && !password){ this.setState({ error: 'Enter your username and password' }) }
 
-        let formData = new FormData()
-        formData.append('username', username)
-        formData.append('password', password)
+        // let formData = new FormData()
+        // formData.append('email', username)
+        // formData.append('password', password)
+        let formData={
+            email:username,
+            password:password
+        }
 
         if( password && username ) {
             this.setState({ loading: true })
             this.setState({ error: '' })
-            
-            axios.post( url + "/admin/login" , formData )
+            // console.log(password,username,url,"userrr")
+            axios({
+                method: 'post',
+                url: url + "/app/user/login",
+                data:(formData)
+              })
+            // axios.post( url + "/app/user/login" , que.stringify(formData) )
             .then(res=>{
                 if(res.data) {
+                    // console.log(res.data.message,"ress")
                     this.props.loginAction(res.data.token, res.data.data)
                     localStorage.setItem('token', res.data.token)
                     localStorage.setItem('user', JSON.stringify(res.data.data))
@@ -54,6 +64,7 @@ class index extends Component {
             })
             .catch(err=>{
                 if(err.response){
+                    console.log("err",err.response)
                     this.setState({ loading: false })
                     this.setState({ error: 'Wrong username or password' })
                 } else {
@@ -62,6 +73,7 @@ class index extends Component {
                 }
 
             })
+            // this.props.loginAction("hghdghd", "satyam")
         }
     }
 

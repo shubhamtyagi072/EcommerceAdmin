@@ -81,8 +81,6 @@ class SubCategory extends Component {
                 .catch(err=>{ this.setState({ message: 'Failed update subcategory' }) })
             })
         }
-
-
     }
 
     render() {

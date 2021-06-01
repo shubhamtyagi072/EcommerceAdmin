@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 //endpoint
-export const url = "https://e-commerce-rest-api.herokuapp.com"
+export const url = "http://basket.langsfree.com"
 
 //headers
 export function headers(token) {

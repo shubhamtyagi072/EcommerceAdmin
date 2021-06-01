@@ -46,7 +46,7 @@ class index extends Component {
     }
 
     fetchCategories = () => {
-        axios.get( url + '/category' )
+        axios.get( url + '/app/category' )
         .then(res=>{
             if(_.isArray(res.data.data)){
                 this.props.categoryAction(res.data.data)

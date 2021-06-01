@@ -12,6 +12,9 @@ export const userReducer = ( state = initialState, action ) => {
                 token: action.token,
                 data: action.payload,
                 login: action.login
+                // token: "hjkgd",
+                // data: "aniket",
+                // login: true
             }
         case LOGOUT:
             return {
